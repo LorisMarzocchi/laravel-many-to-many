@@ -1,7 +1,7 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-    <h1 class="text-center text-danger p-3">Comics List:</h1>
+    <h1 class="text-center text-danger p-3">Project List:</h1>
     @if (session('delete_success'))
         @php $project = session('delete_success') @endphp
         <div class="alert alert-danger">

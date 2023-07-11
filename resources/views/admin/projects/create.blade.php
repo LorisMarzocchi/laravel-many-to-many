@@ -58,11 +58,11 @@
         </div>
 
             {{-- @dump($errors->get('technologies.*')) --}}
-            {{-- @error('technologies')
-                <div class="">
+            @error('technologies.*')
+                <div class="text-danger mt-3">
                     {{ $message }}
                 </div>
-            @enderror --}}
+            @enderror
 
         <div class="mb-3">
             <label for="url_image" class="form-label">Url Image</label>

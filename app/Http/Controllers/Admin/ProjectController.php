@@ -18,13 +18,16 @@ class ProjectController extends Controller
         'description' => 'required|string',
         // 'languages' => 'required|string|max:50',
         'link_github' => 'required|url|max:150',
+        'technologies' => 'nullable|array',
+        'technologies.*' => 'integer|exists:technologies,id',
+
     ];
     private $validation_messages =[
         'required'    => 'il campo :attribute è obbligatorio',// per personalizzare il messaggio di errore
         'min'    => 'il campo :attribute deve avere :min carattri',
         'max'    => 'il campo :attribute deve avere :max carattri',
         'url'   => 'il campo è obbligatorio',
-        'exists' => 'Valore non accetato'
+        'exists' => 'Valore non accetato',
     ];
 
     /**
