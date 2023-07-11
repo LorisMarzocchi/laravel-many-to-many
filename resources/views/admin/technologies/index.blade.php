@@ -29,8 +29,8 @@
                 <th scope="row">{{ $technology->id }}</th>
                 <td>{{ $technology->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.technology.show', ['technology' => $technology]) }}">View</a>
-                    <a class="btn btn-warning" href="{{ route('admin.technology.edit', ['technology' => $technology]) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">View</a>
+                    <a class="btn btn-warning" href="{{ route('admin.technologies.edit', ['technology' => $technology]) }}">Edit</a>
                     <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
                         Delete
                     </button>
@@ -55,14 +55,19 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form
                     action=""
-                    data-template= "{{ route('admin.technology.destroy', ['technology' => '*****']) }}"
+                    data-template= "{{ route('admin.technologies.destroy', ['technology' => '*****']) }}"
                     method="post"
                     class="d-inline-block"
                     id="confirm-delete"
                 >
                     @csrf
                     @method('delete')
-                    <button class="btn btn-danger">Yes</button>
+                    <button class="btn btn-danger">Delete</button>
+                    {{-- <form class="d-inline-block" method="POST" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger">Delete</button>
+                    </form> --}}
                 </form>
             </div>
         </div>

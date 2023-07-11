@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown ms-5">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Projects
@@ -28,7 +28,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Project Types
+                        Types
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('admin.types.index') }}">Type Index</a></li>
@@ -41,8 +41,8 @@
                         Technology
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('admin.technologies.index') }}">Type Index</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.technologies.create') }}">Add New Project Type</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.technologies.index') }}">Technology Index</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.technologies.create') }}">Add New Technology</a></li>
                     </ul>
                 </li>
             </ul>

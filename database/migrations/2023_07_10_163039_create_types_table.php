@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('types', function (Blueprint $table) {
-            $table->id();
 
+            $table->id();
             $table->string('name', 50);
             $table->text('description');
+
         });
     }
 

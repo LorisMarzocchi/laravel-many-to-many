@@ -16,7 +16,6 @@ class ProjectController extends Controller
         'type_id' => 'required|integer|exists:types,id',
         'url_image' => 'required|url|max:250',
         'description' => 'required|string',
-        // 'languages' => 'required|string|max:50',
         'link_github' => 'required|url|max:150',
         'technologies' => 'nullable|array',
         'technologies.*' => 'integer|exists:technologies,id',

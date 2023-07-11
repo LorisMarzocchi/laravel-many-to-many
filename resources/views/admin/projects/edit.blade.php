@@ -32,7 +32,7 @@
                 @foreach ($types as $type)
                     <option
                         value="{{ $type->id }}"
-                        @if (old('type_id', $project->type->id) == $type->id) selected @endif
+                        @if ($project->type && old('type_id', $project->type->id) == $type->id) selected @endif
                     >{{ $type->name }}</option>
                 @endforeach
             </select>

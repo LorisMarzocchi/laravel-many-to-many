@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class TechnologiesController extends Controller
 {
-    // private $validation= [
-    //     'name'         => 'required|string|max:50',
-    // ];
+    private $validation= [
+        'name'         => 'required|string|max:50',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +18,8 @@ class TechnologiesController extends Controller
      */
     public function index()
     {
-        $technology = Technology::all();
-        return view('admin.technology.index', compact('tecnologies'));
+        $technologies = Technology::all();
+        return view('admin.technologies.index', compact('technologies'));
     }
 
     /**
@@ -29,7 +29,7 @@ class TechnologiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.technologies.create');
     }
 
     /**
@@ -40,7 +40,15 @@ class TechnologiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validation);
+
+        $data = $request->all();
+        // Salvare i dati nel database
+        $newTechnology =            new Technology();
+        $newTechnology->name =      $data['name'];
+        $newTechnology->save();
+
+        return redirect()->route('admin.technologies.show', ['technology' => $newTechnology]);
     }
 
     /**
@@ -49,9 +57,9 @@ class TechnologiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Technology $technology)
     {
-        return view('admin.technologies.show');
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**
@@ -60,9 +68,9 @@ class TechnologiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -72,9 +80,18 @@ class TechnologiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Technology $technology)
     {
-        //
+        $request->validate($this->validation);
+
+        $data = $request->all();
+
+        $technology->name           = $data['name'];
+
+        $technology->update();
+
+        return redirect()->route('admin.technologies.show', ['technology' => $technology]);
+
     }
 
     /**
@@ -83,8 +100,11 @@ class TechnologiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Technology $technology)
     {
-        //
+        $technology->projects()->detach();
+
+        $technology->delete();
+        return to_route('admin.technologies.index');
     }
 }

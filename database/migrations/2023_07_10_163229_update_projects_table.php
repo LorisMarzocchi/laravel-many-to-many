@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             // creo la colonna della chiave esterna
 
-            $table->unsignedBigInteger('type_id')->after('id');
+            $table->unsignedBigInteger('type_id')->after('id')->nullable();;
 
             // definire la colonna come chiave esterna
 
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('set null');
         });
     }
 

@@ -40,15 +40,27 @@
                 <tr>
                     <th scope="row">{{ $project->title }}</th>
                     {{-- <td>{{ $project->url_image }}</td> --}}
-                    <th><a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}</a></th>
+                    <th>
+                        @if ($project->type)
+                            <a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}</a>
+                        @elseif($project->type === null)
+                            {{ 'No type' }}
+                        @endif
+                    </th>
 
                     <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td>
 
                     <td class="text-center">{{ $project->description }}</td>
 
-                    {{-- <th><a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</a></th> --}}
+                    <td>
+                        @foreach($project->technologies as $technology)
+                            <a href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}">
+                                {{ $technology->name }}
+                            </a>
+                        @endforeach
+                    </td>
 
-                    <td>{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td>
+                    {{-- <td>{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td> --}}
 
                     <td><a class=" text-decoration-none " href="{{ $project->link_github }}">{{ $project->link_github }}"</a></td>
 

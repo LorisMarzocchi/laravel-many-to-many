@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
     Route::resource('projects', ProjectController::class);
     Route::resource('types', TypesController::class);
-    Route::resource('tecnologies', TechnologiesController::class);
+    Route::resource('technologies', TechnologiesController::class);
 
 
 });
