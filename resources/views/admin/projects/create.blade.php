@@ -39,28 +39,30 @@
         </div>
 
         <div class="mb-3">
-            <h3>Tags</h3>
-            @foreach($technologies as $technology)
-                <div class="mb-3 form-check">
-                    <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id="technology{{ $technology->id }}"
-                        name="technologies[]"
-                        value="{{ $technology->id }}"
-                        @if (in_array($technology->id, old('technologyies', []))) checked @endif
-                    >
-                    <label class="form-check-label" for="technology{{ $technology->id }}">{{ $technology->name }}</label>
-                </div>
+            <h6>technologies</h6>
+            @foreach ($technologies as $technology)
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="technology{{ $technology->id }}"
+                    value="{{ $technology->id }}"
+                    name="technologies[]"
+                    @if (in_array($technology->id, old('technologies') ?: [])) checked @endif
+                >
+                <label class="form-check-label" for="technology{{ $technology->id }}">
+               {{ $technology->name }}
+                </label>
+            </div>
             @endforeach
+        </div>
 
-            {{-- @dump($errors->get('tags.*')) --}}
-            {{-- @error('tags')
+            {{-- @dump($errors->get('technologies.*')) --}}
+            {{-- @error('technologies')
                 <div class="">
                     {{ $message }}
                 </div>
             @enderror --}}
-        </div>
 
         <div class="mb-3">
             <label for="url_image" class="form-label">Url Image</label>
@@ -81,7 +83,7 @@
         </div>
 
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="languages" class="form-label">Languages</label>
             <input type="text" class="form-control @error('languages') is-invalid @enderror" id="languages" name="languages"
                 value="{{ old('languages') }}">
@@ -89,7 +91,7 @@
                 @error('languages')
                     {{ $message }}
                 @enderror
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="link_github" class="form-label">link_github</label>

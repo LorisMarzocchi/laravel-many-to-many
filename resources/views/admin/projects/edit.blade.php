@@ -10,7 +10,7 @@
         </ul>
     </div>
 @endif --}}
-    <h1>Inserisci nuovo Progetto</h1>
+    <h1 class="text-center text-danger p-3">Modifica Progetto</h1>
     <form class="w-75 m-auto" method="POST" action="{{ route('admin.projects.update', ['project' => $project]) }}">
         @method('put')
         @csrf
@@ -42,6 +42,30 @@
         </div>
 
         <div class="mb-3">
+            <h3>Technologies</h3>
+            @foreach($technologies as $technology)
+                <div class="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="technology{{ $technology->id }}"
+                        name="technologies[]"
+                        value="{{ $technology->id }}"
+                        @if (in_array($technology->id, old('technologies', $project->technologies->pluck('id')->all()))) checked @endif
+                    >
+                    <label class="form-check-label" for="technology{{ $technology->id }}">{{ $technology->name }}</label>
+                </div>
+            @endforeach
+
+            {{-- @dump($errors->get('technologies.*')) --}}
+            {{-- @error('technologies')
+                <div class="">
+                    {{ $message }}
+                </div>
+            @enderror --}}
+        </div>
+
+        <div class="mb-3">
             <label for="url_image" class="form-label">Url Image</label>
             <input type="text" class="form-control @error('url_image') is-invalid @enderror" id="url_image" name="url_image"
                 value="{{ old('url_image', $project->url_image) }}">
@@ -59,7 +83,7 @@
 
         </div>
 
-
+{{--
         <div class="mb-3">
             <label for="languages" class="form-label">Languages</label>
             <input type="text" class="form-control @error('languages') is-invalid @enderror" id="languages" name="languages"
@@ -68,7 +92,7 @@
                 @error('languages')
                     {{ $message }}
                 @enderror
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="link_github" class="form-label">link_github</label>

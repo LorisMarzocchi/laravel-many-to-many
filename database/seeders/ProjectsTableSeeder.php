@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 // use Faker\Generator as Faker;
-use App\Models\Technology;
+// use App\Models\Technology;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

@@ -16,7 +16,7 @@ class ProjectController extends Controller
         'type_id' => 'required|integer|exists:types,id',
         'url_image' => 'required|url|max:250',
         'description' => 'required|string',
-        'languages' => 'required|string|max:50',
+        // 'languages' => 'required|string|max:50',
         'link_github' => 'required|url|max:150',
     ];
     private $validation_messages =[
@@ -45,8 +45,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $technologies       = Technology::all();
         $types              = Type::all();
+        $technologies       = Technology::all();
         return view('admin.projects.create', compact('types', 'technologies'));
     }
 
@@ -67,11 +67,13 @@ class ProjectController extends Controller
         $newProject->type_id        = $data['type_id'];
         $newProject->url_image      = $data['url_image'];
         $newProject->description    = $data['description'];
-        $newProject->languages      = $data['languages'];
+        // $newProject->languages      = $data['languages'];
         $newProject->link_github    = $data['link_github'];
         $newProject->save();
 
-        return to_route('admin.projects.show', ['project' => $newProject]);
+        $newProject->technologies()->sync($data['technologies'] ?? []);
+
+        return redirect()->route('admin.projects.show', ['project' => $newProject]);
     }
 
     /**
@@ -93,8 +95,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $types              = Type::all();
         $technologies       = Technology::all();
-        $types = Type::all();
 
         return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
@@ -117,11 +119,13 @@ class ProjectController extends Controller
         $project->type_id       = $data['type_id'];
         $project->url_image     = $data['url_image'];
         $project->description   = $data['description'];
-        $project->languages     = $data['languages'];
+        // $project->languages     = $data['languages'];
         $project->link_github   = $data['link_github'];
         $project->update();
 
-        return to_route('admin.projects.show', ['project' => $project]);
+        $project->technologies()->sync($data['technologies'] ?? []);
+
+        return redirect()->route('admin.projects.show', ['project' => $project]);
     }
 
     /**
@@ -133,7 +137,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
 
-
+        $project->technologies()->detach();
 
         $project->delete();
 

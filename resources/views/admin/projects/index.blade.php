@@ -31,7 +31,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Image</th>
                 <th scope="col">Description</th>
-                <th scope="col">Languages</th>
+                <th scope="col">Technologies</th>
                 <th scope="col">Link Github</th>
             </tr>
         </thead>
@@ -41,22 +41,26 @@
                     <th scope="row">{{ $project->title }}</th>
                     {{-- <td>{{ $project->url_image }}</td> --}}
                     <th><a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}</a></th>
+
                     <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td>
+
                     <td class="text-center">{{ $project->description }}</td>
+
+                    {{-- <th><a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ implode(', ', $project->technologies->pluck('name')->all()) }}</a></th> --}}
+
                     <td>{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td>
+
                     <td><a class=" text-decoration-none " href="{{ $project->link_github }}">{{ $project->link_github }}"</a></td>
+
                     <td class="d-flex mt-4">
                         <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
                         <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
-                            Delete
-                        </button>
-                        {{-- <form class=" d-inline-block " action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
+                        <form class=" d-inline-block " action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
                             method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
             @endforeach
