@@ -35,6 +35,16 @@
                         <li><a class="dropdown-item" href="{{ route('admin.types.create') }}">Add New Project Type</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Technology
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('admin.technologies.index') }}">Type Index</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.technologies.create') }}">Add New Project Type</a></li>
+                    </ul>
+                </li>
             </ul>
 
 

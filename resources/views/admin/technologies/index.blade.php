@@ -1,4 +1,4 @@
-{{-- @extends('admin.layouts.base')
+@extends('admin.layouts.base')
 
 @section('contents')
 
@@ -24,16 +24,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($types as $type)
+        @foreach ($technologies as $technology)
             <tr>
-                <th scope="row">{{ $type->id }}</th>
-                <td>{{ $type->name }}</td>
+                <th scope="row">{{ $technology->id }}</th>
+                <td>{{ $technology->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.types.show', ['type' => $type]) }}">View</a>
-                    <a class="btn btn-warning" href="{{ route('admin.types.edit', ['type' => $type]) }}">Edit</a>
-                    {{-- <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $type->id }}">
+                    <a class="btn btn-primary" href="{{ route('admin.technology.show', ['technology' => $technology]) }}">View</a>
+                    <a class="btn btn-warning" href="{{ route('admin.technology.edit', ['technology' => $technology]) }}">Edit</a>
+                    <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
                         Delete
-                    </button> --}}
+                    </button>
 
                 </td>
             </tr>
@@ -41,7 +41,7 @@
     </tbody>
 </table>
 
-{{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,7 +55,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form
                     action=""
-                    data-template= "{{ route('admin.types.destroy', ['type' => '*****']) }}"
+                    data-template= "{{ route('admin.technology.destroy', ['technology' => '*****']) }}"
                     method="post"
                     class="d-inline-block"
                     id="confirm-delete"
@@ -67,5 +67,5 @@
             </div>
         </div>
     </div>
-</div>--}}
-@endsection --}}
+</div>
+@endsection
