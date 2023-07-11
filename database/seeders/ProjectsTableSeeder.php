@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 // use Faker\Generator as Faker;
+use App\Models\Technology;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -17,11 +18,12 @@ class ProjectsTableSeeder extends Seeder
     public function run()
     {
         //
-        foreach(config('projects') as $project) {
+        $technologyIds = Technology::all()->pluck('id')->toArray();
 
-            Project::create($project);
+        foreach (config('projects') as $project) {
+            $project = Project::create($project);
+            $project->technologies()->attach($technologyIds);
         }
-    // }
     // public function run(Faker $faker)
     // {
     //     for ($i = 0; $i < 30; $i++)
@@ -34,6 +36,6 @@ class ProjectsTableSeeder extends Seeder
     //             'link_github'     => $faker->url(),
 
     //         ]);
-    //     }
     }
 }
+
