@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('title', 50);
             $table->string('url_image', 250)->nullable();
             $table->text('description')->nullable();
-            $table->string('languages', 50);
             $table->string('link_github', 200);
 
             $table->timestamps();

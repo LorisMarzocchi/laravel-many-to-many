@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -44,8 +45,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies       = Technology::all();
+        $types              = Type::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -57,22 +59,6 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->validation, $this->validation_messages);
-        // $request->validate([
-        //     'title' => 'required|string|max:50',
-        //     'url_image' => 'required|url|max:250',
-        //     'description' => 'required|string',
-        //     'languages' => 'required|string|max:50',
-        //     'link_github' => 'required|url|max:150',
-
-        // ],
-        // [
-        //     'required'    => 'il campo :attribute è obbligatorio',// per personalizzare il messaggio di errore
-        //     'min'    => 'il campo :attribute deve avere :min carattri',
-        //     'max'    => 'il campo :attribute deve avere :max carattri',
-        //     'url'   => 'il campo è obbligatorio',
-        // ]
-
-    // );
 
         $data= $request->all();
 
@@ -107,9 +93,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies       = Technology::all();
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

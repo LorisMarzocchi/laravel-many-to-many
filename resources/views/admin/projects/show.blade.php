@@ -9,7 +9,7 @@
             <h5>Type: {{ $project->type->name }}</h5>
             <h5>
                 <span class="text-danger">Languages:</span>
-                {{ $project->languages }}
+                {{ implode(', ', $project->technologies->pluck('name')->all()) }}
             </h5>
             <h5>
                 <a href="{{ $project->link_github }}" class="text-danger">GitHub Link:</a>

@@ -43,7 +43,7 @@
                     <th><a href="{{ route('admin.types.show', ['type' => $project->type]) }}">{{ $project->type->name }}</a></th>
                     <td><img class="img-thumbnail" src="{{ $project->url_image }}" alt="{{ $project->title }}" style="width: 200px;"></td>
                     <td class="text-center">{{ $project->description }}</td>
-                    <td>{{ $project->languages }}</td>
+                    <td>{{ implode(', ', $project->technologies->pluck('name')->all()) }}</td>
                     <td><a class=" text-decoration-none " href="{{ $project->link_github }}">{{ $project->link_github }}"</a></td>
                     <td class="d-flex mt-4">
                         <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>

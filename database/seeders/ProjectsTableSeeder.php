@@ -17,13 +17,15 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $technologyIds = Technology::all()->pluck('id')->toArray();
+        foreach (config('projects') as $projectData) {
+            $technologies = $projectData['technologies'];
+            unset($projectData['technologies']);
 
-        foreach (config('projects') as $project) {
-            $project = Project::create($project);
-            $project->technologies()->attach($technologyIds);
+            $project = Project::create($projectData);
+            $project->technologies()->sync($technologies);
         }
+
+    }
     // public function run(Faker $faker)
     // {
     //     for ($i = 0; $i < 30; $i++)
@@ -36,6 +38,5 @@ class ProjectsTableSeeder extends Seeder
     //             'link_github'     => $faker->url(),
 
     //         ]);
-    }
 }
 
