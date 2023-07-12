@@ -75,6 +75,6 @@ class TypesController extends Controller
         // $type->projects()->detach();
 
         $type->delete();
-        return to_route('admin.types.index');
+        return to_route('admin.types.index')->with('delete_success', $type);
     }
 }

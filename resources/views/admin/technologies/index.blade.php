@@ -7,7 +7,7 @@
     $technology = session('delete_success')
 @endphp
 <div class="alert alert-danger">
-    "{{ $technologies->name }}" has been moved to the trash!!
+    "{{ $technology->name }}" has been cancelled
 
 </div>
 @endif
@@ -28,6 +28,7 @@
                 <td>
                     <a class="btn btn-primary" href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">View</a>
                     <a class="btn btn-warning" href="{{ route('admin.technologies.edit', ['technology' => $technology]) }}">Edit</a>
+
                     <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
                         Delete
                     </button>
@@ -52,20 +53,15 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form
                     action=""
-                    {{-- {{ route('admin.technologies.destroy', ['technology' => $technology->id]) }} --}}
                     data-template= "{{ route('admin.technologies.destroy', ['technology' => '*****']) }}"
-                    method="post"
+                    method="POST"
                     class="d-inline-block"
                     id="confirm-delete"
                 >
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger">Delete</button>
-                    {{-- <form class="d-inline-block" method="POST" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-danger">Delete</button>
-                    </form> --}}
+
                 </form>
             </div>
         </div>

@@ -6,10 +6,7 @@
         @php $project = session('delete_success') @endphp
         <div class="alert alert-danger">
             Project '{{ $project->title }}' has been cancelled
-            {{-- <form action="{{ route('projects.restore', ['project' => $project]) }}" method="POST">
-                @csrf
-                <button class="btn btn-warning">Restore</button>
-            </form> --}}
+
         </div>
     @endif
 
@@ -56,7 +53,7 @@
                         @foreach($project->technologies as $technology)
                             <a class="mx-1" href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}">
                                 {{ $technology->name }}
-                            </a>
+                            </a>{{ !$loop->last ? '-' : ' ' }}
                         @endforeach
                     </td>
 
@@ -74,7 +71,7 @@
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
                         </form> --}}
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
                             Delete
                         </button>
                     </td>
@@ -95,8 +92,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form class="d-inline-block"
-                        method="POST"
-                        action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}">
+                    action=""
+                        data-template= "{{ route('admin.projects.destroy', ['project' => '*****']) }}"
+                        id="confirm-delete"
+                        method="POST">
                         @csrf
                         @method('delete')
                         <button class="btn btn-danger">Delete</button>

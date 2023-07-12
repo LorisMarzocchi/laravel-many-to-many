@@ -4,14 +4,14 @@
 
 @if (session('delete_success'))
 @php
-    $project = session('delete_success')
+    $type = session('delete_success')
 @endphp
 <div class="alert alert-danger">
-    "{{ $project->title }}" has been moved to the trash!!
-    <form action="{{ route("admin.project.cancel", ['project' => $project] )}}" method="post">
+    "{{ $type->name }}" has been cancelled
+    {{-- <form action="{{ route("admin.project.cancel", ['project' => $project] )}}" method="post">
         @csrf
         <button class="btn btn-warning">Cancel</button>
-    </form>
+    </form> --}}
 </div>
 @endif
 
@@ -56,7 +56,7 @@
                 <form
                     action=""
                     data-template= "{{ route('admin.types.destroy', ['type' => '*****']) }}"
-                    method="post"
+                    method="POST"
                     class="d-inline-block"
                     id="confirm-delete"
                 >
