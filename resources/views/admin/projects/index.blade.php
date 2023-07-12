@@ -25,7 +25,7 @@
         <thead>
             <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Category</th>
+                <th scope="col">Type</th>
                 <th scope="col">Image</th>
                 <th scope="col">Description</th>
                 <th scope="col">Technologies</th>
@@ -71,7 +71,7 @@
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
                         </form> --}}
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
                             Delete
                         </button>
                     </td>

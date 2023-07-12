@@ -20,6 +20,8 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Count</th>
+
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -28,6 +30,7 @@
             <tr>
                 <th scope="row">{{ $type->id }}</th>
                 <td>{{ $type->name }}</td>
+                <td>{{ count($type->projects) }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('admin.types.show', ['type' => $type]) }}">View</a>
                     <a class="btn btn-warning" href="{{ route('admin.types.edit', ['type' => $type]) }}">Edit</a>

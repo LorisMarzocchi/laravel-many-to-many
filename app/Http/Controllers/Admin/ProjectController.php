@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Type;
 use App\Models\Project;
 use App\Models\Technology;
-use App\Models\Type;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
@@ -66,6 +66,7 @@ class ProjectController extends Controller
 
         $newProject = new Project();
         $newProject->title          = $data['title'];
+        $newProject->slug           = $newProject::slugger($data['title']);
         $newProject->type_id        = $data['type_id'];
         $newProject->url_image      = $data['url_image'];
         $newProject->description    = $data['description'];
@@ -84,8 +85,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         return view('admin.projects.show', compact('project'));
     }
 
@@ -95,8 +97,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         $types              = Type::all();
         $technologies       = Technology::all();
 
@@ -110,8 +113,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
+
+
         $request->validate($this->validation, $this->validation_messages);
 
         $data= $request->all();
@@ -121,7 +127,6 @@ class ProjectController extends Controller
         $project->type_id       = $data['type_id'];
         $project->url_image     = $data['url_image'];
         $project->description   = $data['description'];
-        // $project->languages     = $data['languages'];
         $project->link_github   = $data['link_github'];
         $project->update();
 
@@ -136,8 +141,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
+
 
         $project->technologies()->detach();
 

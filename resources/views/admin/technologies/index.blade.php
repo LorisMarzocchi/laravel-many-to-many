@@ -17,6 +17,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Count</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -25,6 +26,7 @@
             <tr>
                 <th scope="row">{{ $technology->id }}</th>
                 <td>{{ $technology->name }}</td>
+                <td>{{ count($technology->projects) }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('admin.technologies.show', ['technology' => $technology]) }}">View</a>
                     <a class="btn btn-warning" href="{{ route('admin.technologies.edit', ['technology' => $technology]) }}">Edit</a>

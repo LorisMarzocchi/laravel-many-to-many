@@ -6,7 +6,18 @@
         <div class="card-body">
             <h3>{{ $project->title }}</h3>
             <p>{{ Str::limit($project->description, 150, '...') }}</p>
-            <h5>Type: {{ $project->type->name }}</h5>
+            @if ($project->type)
+                <h5>
+                    <span class="text-danger">Type:</span> {{ $project->type->name }}
+                </h5>
+
+             @elseif($project->type === null)
+             <h5>
+                <span class="text-danger">Type:</span> {{ 'No type' }}
+            </h5>
+
+            @endif
+
             <h5>
                 <span class="text-danger">Languages:</span>
                 {{ implode(', ', $project->technologies->pluck('name')->all()) }}

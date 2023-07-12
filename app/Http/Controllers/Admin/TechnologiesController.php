@@ -105,6 +105,7 @@ class TechnologiesController extends Controller
         $technology->projects()->detach();
 
         $technology->delete();
+
         return to_route('admin.technologies.index')->with('delete_success', $technology);
     }
 }

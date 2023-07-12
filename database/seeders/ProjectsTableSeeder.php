@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Project;
 // use Faker\Generator as Faker;
-// use App\Models\Technology;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -18,8 +17,14 @@ class ProjectsTableSeeder extends Seeder
     public function run()
     {
         foreach (config('projects') as $projectData) {
+
+
             $technologies = $projectData['technologies'];
             unset($projectData['technologies']);
+
+
+            $slug = Project::slugger($projectData['title']);
+            $projectData['slug'] = $slug;
 
             $project = Project::create($projectData);
             $project->technologies()->sync($technologies);
@@ -27,17 +32,6 @@ class ProjectsTableSeeder extends Seeder
         }
 
     }
-    // public function run(Faker $faker)
-    // {
-    //     for ($i = 0; $i < 30; $i++)
-    //     {
-    //         Project::create([
-    //             'title'       => $faker->words(rand(2, 3), true),
-    //             'url_image'   =>'https://picsum.photos/id/'. rand(1, 270) . '/200/300',
-    //             'description'     => $faker->paragraphs(rand(1, 1), true),
-    //             'languages'     => $faker->words(rand(2, 2), true),
-    //             'link_github'     => $faker->url(),
 
-    //         ]);
 }
 
