@@ -10,7 +10,7 @@
         </ul>
     </div>
 @endif --}}
-    <h1 class="text-center text-danger p-3">Modifica Progetto</h1>
+    <h1 class="text-center text-danger p-3">Modify Project</h1>
     <form class="w-75 m-auto" method="POST" action="{{ route('admin.projects.update', ['project' => $project]) }}">
         @method('put')
         @csrf

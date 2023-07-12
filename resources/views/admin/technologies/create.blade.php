@@ -1,7 +1,7 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-<h1 class="text-danger text-center mb-5">Add New Type:</h1>
+<h1 class="text-danger text-center mb-5">Create New Technologies:</h1>
 
     <form method="POST" action="{{ route('admin.technologies.store') }}">
         @csrf

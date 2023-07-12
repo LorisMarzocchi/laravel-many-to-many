@@ -10,7 +10,7 @@
         </ul>
     </div>
 @endif --}}
-    <h1 class="text-danger text-center mb-5">Inserisci nuovo Progetto</h1>
+    <h1 class="text-danger text-center mb-5">Create New Project</h1>
     <form class="w-75 m-auto" method="POST" action="{{ route('admin.projects.store') }}">
 
         @csrf

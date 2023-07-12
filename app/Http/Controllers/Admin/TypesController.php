@@ -72,6 +72,8 @@ class TypesController extends Controller
 
     public function destroy(Type $type)
     {
+        // $type->projects()->detach();
+
         $type->delete();
         return to_route('admin.types.index');
     }

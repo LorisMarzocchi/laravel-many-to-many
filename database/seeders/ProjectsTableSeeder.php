@@ -23,6 +23,7 @@ class ProjectsTableSeeder extends Seeder
 
             $project = Project::create($projectData);
             $project->technologies()->sync($technologies);
+            // $project->technologies()->sync($projectData['technologies']);
         }
 
     }

@@ -67,12 +67,16 @@
                     <td class="d-flex mt-4">
                         <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
                         <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
-                        <form class=" d-inline-block " action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
+                        {{-- <form class=" d-inline-block "
+                            action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
                             method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
-                        </form>
+                        </form> --}}
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             @endforeach
@@ -90,7 +94,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <form class="d-inline-block" method="POST" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}">
+                    <form class="d-inline-block"
+                        method="POST"
+                        action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}">
                         @csrf
                         @method('delete')
                         <button class="btn btn-danger">Delete</button>
