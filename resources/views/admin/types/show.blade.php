@@ -2,10 +2,10 @@
 
 @section('contents')
 
-    <h1>{{ $type->name }}</h1>
+    <h2 class="text-danger p-3">{{ $type->name }}</h2>
     <p>{{ $type->description }}</p>
 
-    <h2>Projects </h2>
+    <h3 class="text-danger p-3">Projects </h3>
     <ul>
         @foreach ($type->projects as $project)
             <li><a href="{{ route('admin.projects.show', ['project' => $project]) }}">{{ $project->title }}</a></li>
