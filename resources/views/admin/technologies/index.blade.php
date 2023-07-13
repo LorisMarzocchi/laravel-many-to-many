@@ -17,7 +17,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Count</th>
+            <th scope="col">Projects Count</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>

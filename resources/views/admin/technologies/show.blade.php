@@ -2,6 +2,7 @@
 
 @section('contents')
 
+<a class="btn btn-primary m-4" href="{{ route('admin.technologies.index') }}">Technologies Index</a>
 
 
     <h2 class="text-center text-danger p-3">Projects using language</h2>

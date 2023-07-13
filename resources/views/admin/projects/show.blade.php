@@ -1,6 +1,7 @@
 @extends('admin.layouts.base')
 
 @section('contents')
+<a class="btn btn-primary m-4" href="{{ route('admin.projects.index') }}">Project Index</a>
     <div class="card border-0 text-center m-auto" style="width: 400px">
         <img src="{{ $project->url_image }}" style="width: 400px; height: 400px" alt="">
         <div class="card-body">
@@ -26,22 +27,9 @@
                 <a href="{{ $project->link_github }}" class="text-danger">GitHub Link:</a>
                 {{ $project->link_github }}
             </h5>
-            {{-- <h5>
-
-                <span class="text-danger">Relese Date:</span>
-                {{ date('d-m-Y', strtotime($comic->sale_date)) }}
-            </h5>
-            <h5>
-                <span class="text-danger">Type:</span>
-                {{ $comic->type }}
-            </h5> --}}
-
-
-
-
-
-
 
         </div>
     </div>
+
+
 @endsection

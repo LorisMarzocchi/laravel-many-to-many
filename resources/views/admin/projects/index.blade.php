@@ -11,12 +11,12 @@
     @endif
 
     {{-- @if (session('restore_success'))
-        @php $comic = session('restore_success') @endphp
+    @php $project = session('restore_success') @endphp
         <div class="alert alert-success">
-            Comic '{{ $comic->title }}' has been restored
+            The project "{{ $project->title }}" has been Restored
         </div>
-    @endif
-    <a class="btn btn-primary m-3" href="{{ route('comics.create') }}">Add New Comic</a>
+    @endif --}}
+    {{-- <a class="btn btn-primary m-3" href="{{ route('comics.create') }}">Add New Comic</a>
     <a class="btn btn-primary m-3" href="{{ route('comics.trashed') }}">Trash</a> --}}
 
 
@@ -64,13 +64,6 @@
                     <td class="d-flex mt-4">
                         <a class="btn btn-primary me-2" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
                         <a class="btn btn-warning me-2" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
-                        {{-- <form class=" d-inline-block "
-                            action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
-                            method="POST">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger">Delete</button>
-                        </form> --}}
                         <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
                             Delete
                         </button>

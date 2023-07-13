@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
 ->group(function () {
     Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
     Route::resource('projects', ProjectController::class);
+    // Route::post('/project/{project}/restore', [ProjectController::class, 'restore'])->name('project.restore');
     Route::resource('types', TypesController::class);
     Route::resource('technologies', TechnologiesController::class);
 
