@@ -152,7 +152,6 @@ class ProjectController extends Controller
 
     public function restore($slug)
     {
-
         $project = Project::find($slug);
 
         Project::withTrashed()->where('slug', $slug)->restore();
@@ -163,36 +162,17 @@ class ProjectController extends Controller
 
     public function trashed()
     {
-        $trashed = Project::onlyTrashed()->paginate(5);
-        return view('admin.projects.trashed', compact('trashed'));
+        $trashedProjects = Project::onlyTrashed()->paginate(5);
+
+        return view('admin.projects.trashed', compact('trashedProjects'));
     }
 
-    public function harddelete($id)
+    public function harddelete($slug)
     {
-        // trovo la technology da eliminare
-        $technology = Technology::withTrashed()->find($id);
+        $project = Project::withTrashed()->where('slug', $slug)->first();
 
-        // technology_id in cui mandare i post
-        $defaultTech = Technology::find(1);
-
-        // seleziono i post da spostare nel nuovo technology_id
-        $postsId = $technology->posts->pluck('id')->all();
-
-        //dissociare tutti i tag dal technology
-        $technology->posts()->detach();
-
-        // associo i post al nuovo technology_id
-        foreach ($postsId as $post) {
-            $defaultTech->posts()->attach($post);
-        }
-
-        //dissociare tutti i tag dal technology
-        // ALTERNATIVA: eliminare direttamente la technology
-        // $technology->posts()->detach();
-
-        // ora che la technology non è collegata a dei post, posso eliminarla
-        $technology->forceDelete();
-
-        return to_route('admin.technologies.index')->with('harddelete_success', $technology);
+        $project->technologies()->detach();
+        $project->forceDelete();
+        return to_route('admin.projects.trashed')->with('delete_success', $project);
     }
 }
