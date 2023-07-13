@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('admin.projects.index') }}">Project Index</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.projects.create') }}">Add Project</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.projects.trashed') }}">Trasch</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.projects.trashed') }}">Trash</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
