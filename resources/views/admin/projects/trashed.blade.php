@@ -1,17 +1,21 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-    <h1 class="text-center text-danger p-3">Project List:</h1>
+
     @if (session('delete_success'))
         @php $project = session('delete_success') @endphp
         <div class="alert alert-danger">
-            Project '{{ $project->title }}' has been cancelled
-
+            The Project "{{ $project->title }}" has been permanently deleted
         </div>
     @endif
 
 
-
+    @if (session('restore_success'))
+        @php $project = session('restore_success') @endphp
+        <div class="alert alert-success">
+            The Project '{{ $project->title }}' has been restored
+        </div>
+    @endif
 
     <table class="table">
         <thead>
@@ -61,26 +65,36 @@
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>
                         </form>
-                        {{-- <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
-                            Delete
-                        </button> --}}
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <form class="d-inline-block"
+                    action=""
+                        data-template= "{{ route('admin.projects.destroy', ['project' => '*****']) }}"
+                        id="confirm-delete"
+                        method="POST">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
 
-    {{ $projects->links() }}
-
-
-    {{-- paginator noBootstrap
-    <div>
-        <ul>
-            @for ($i = 1; $i <= $comics->lastPage(); $i++)
-            <li>
-                <a href="/comics?page={{ $i }}">{{ $i }}</a>
-            </li>
-            @endfor
-        </ul>
-  </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

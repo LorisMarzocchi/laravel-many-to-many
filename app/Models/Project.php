@@ -6,11 +6,13 @@ use App\Models\Type;
 use App\Traits\Slugger;
 use App\Models\Technology;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     use Slugger;
 
 

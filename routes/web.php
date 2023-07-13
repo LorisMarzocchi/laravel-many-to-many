@@ -28,9 +28,15 @@ Route::middleware(['auth', 'verified'])
 ->prefix('admin')
 ->group(function () {
     Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
+
     Route::resource('projects', ProjectController::class);
-    // Route::post('/project/{project}/restore', [ProjectController::class, 'restore'])->name('project.restore');
+
+    Route::get('projects/trashed', [ProjectController::class, 'trashed'])->name('projects.trashed');
+    Route::post('projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
+    Route::delete('projects/{project}/harddelete', [ProjectController::class, 'harddelete'])->name('projects.harddelete');
+
     Route::resource('types', TypesController::class);
+
     Route::resource('technologies', TechnologiesController::class);
 
 

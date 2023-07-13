@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('link_github', 200);
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

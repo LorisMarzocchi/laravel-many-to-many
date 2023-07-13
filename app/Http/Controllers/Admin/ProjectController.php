@@ -21,8 +21,8 @@ class ProjectController extends Controller
         'technologies.*' => 'integer|exists:technologies,id',
 
     ];
-    private $validation_messages =[
-        'required'    => 'il campo :attribute è obbligatorio',// per personalizzare il messaggio di errore
+    private $validation_messages = [
+        'required'    => 'il campo :attribute è obbligatorio', // per personalizzare il messaggio di errore
         'min'    => 'il campo :attribute deve avere :min carattri',
         'max'    => 'il campo :attribute deve avere :max carattri',
         'url'   => 'il campo è obbligatorio',
@@ -62,7 +62,7 @@ class ProjectController extends Controller
     {
         $request->validate($this->validation, $this->validation_messages);
 
-        $data= $request->all();
+        $data = $request->all();
 
         $newProject = new Project();
         $newProject->title          = $data['title'];
@@ -120,7 +120,7 @@ class ProjectController extends Controller
 
         $request->validate($this->validation, $this->validation_messages);
 
-        $data= $request->all();
+        $data = $request->all();
 
 
         $project->title         = $data['title'];
@@ -145,21 +145,54 @@ class ProjectController extends Controller
     {
         $project = Project::where('slug', $slug)->firstOrFail();
 
-
-        $project->technologies()->detach();
-
         $project->delete();
 
         return to_route('admin.projects.index')->with('delete_success', $project);
     }
 
-    // public function restore($slug)
-    // {
-    //     Project::withTrashed()->where('slug', $slug)->restore();
-    //     $project = Project::where('slug', $slug)->firstOrFail();
+    public function restore($slug)
+    {
 
-    //     $project = Project::find($slug);
+        $project = Project::find($slug);
 
-    //     return to_route('admin.project.trashed')->with('restore_success', $project);
-    // }
+        Project::withTrashed()->where('slug', $slug)->restore();
+        $project = Project::where('slug', $slug)->firstOrFail();
+
+        return to_route('admin.projects.trashed')->with('restore_success', $project);
+    }
+
+    public function trashed()
+    {
+        $trashed = Project::onlyTrashed()->paginate(5);
+        return view('admin.projects.trashed', compact('trashed'));
+    }
+
+    public function harddelete($id)
+    {
+        // trovo la technology da eliminare
+        $technology = Technology::withTrashed()->find($id);
+
+        // technology_id in cui mandare i post
+        $defaultTech = Technology::find(1);
+
+        // seleziono i post da spostare nel nuovo technology_id
+        $postsId = $technology->posts->pluck('id')->all();
+
+        //dissociare tutti i tag dal technology
+        $technology->posts()->detach();
+
+        // associo i post al nuovo technology_id
+        foreach ($postsId as $post) {
+            $defaultTech->posts()->attach($post);
+        }
+
+        //dissociare tutti i tag dal technology
+        // ALTERNATIVA: eliminare direttamente la technology
+        // $technology->posts()->detach();
+
+        // ora che la technology non è collegata a dei post, posso eliminarla
+        $technology->forceDelete();
+
+        return to_route('admin.technologies.index')->with('harddelete_success', $technology);
+    }
 }
